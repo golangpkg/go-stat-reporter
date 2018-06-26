@@ -1,0 +1,50 @@
+{{define "left_menu.html"}}
+
+    {{ if or  .StatTableMenuOpen }}class="active open"{{end}}
+    {{range $key, $val := .MenuTypeMap}}
+
+        <li class="open">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-caret-right"></i>
+            {{$key}}
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu nav-show">
+            {{range $val}}
+                <li {{if .MenuIsOpen }}class="active"{{end}}>
+                    <a href="/admin/statTable/data?TableName={{.TableName}}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                    {{.Name}}
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            {{end}}
+            </ul>
+        </li>
+    {{end}}
+
+
+        <div class="demo-drawer mdl-layout__drawer mdl-color--blue mdl-color-text--grey-50">
+            <header class="demo-drawer-header">
+                <img src="/static/img/user.jpg" class="demo-avatar">
+                <div class="demo-avatar-dropdown">
+                    <span>欢迎使用统计报表系统</span>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+            <nav class="demo-navigation mdl-navigation mdl-color--blue">
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">home</i>Home</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">inbox</i>Inbox</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">delete</i>Trash</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">report</i>Spam</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">forum</i>Forums</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">flag</i>Updates</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">local_offer</i>Promos</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">shopping_cart</i>Purchases</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--grey-50 material-icons" role="presentation">people</i>Social</a>
+                <div class="mdl-layout-spacer"></div>
+            </nav>
+        </div>
+
+{{end}}
