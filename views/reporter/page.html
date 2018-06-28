@@ -3,55 +3,56 @@
 <head>
     <title>Material Design Lite</title>
 {{template "meta.html" .}}
-{{template "footer.html" .}}
 </head>
 <body>
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
     <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">Home1</span>
+            <span class="mdl-layout-title">{{.Page.Name}}</span>
             <div class="mdl-layout-spacer"></div>
         </div>
     </header>
-
     {{template "left_menu.html" .}}
-
     <main class="mdl-layout__content mdl-color--grey-100">
-
-    {{range $key, $val := .Page.DataTables}}
-        <a class="mdl-navigation__link" href="/admin/page?pageId={{$val.Id}}">
-            <i class="mdl-color-text--grey-50 material-icons" role="presentation">report</i>{{$val.Name}}
-        </a>
-    {{end}}
-
+        {{range $key, $table := .Page.DataTables}}
         <div class="mdl-grid demo-content">
+            <h5 class="mdl-cell">{{$table.Name}}</h5>
             <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
                     <thead>
-                    <tr>{{ range .StatTable.ColumnNameArray }}
-                        <th>{{ . }}</th>
+                    <tr>{{ range $table.LabelArray }}
+                        <th>{{.}}</th>
                     {{ end }}
                     </tr>
                     </thead>
                 </table>
             </div>
         </div>
-        <script type="application/javascript">
-            $(document).ready(function() {
-                $('#example').DataTable( {
-                    columnDefs: [
-                        {
-                            targets: [ 0, 1, 2 ],
-                            className: 'mdl-data-table__cell--non-numeric'
-                        }
-                    ]
-                } );
-            } );
-        </script>
-
+        {{end}}
     </main>
 </div>
-
-
 </body>
+
+{{template "footer.html" .}}
+{{range $key, $table := .Page.DataTables}}
+<script type="application/javascript">
+    jQuery(function($) {
+        var {{rawJs $table.Id}}
+        $('#dynamic-table-{{$table.Id}}').DataTable( {
+            "bFilter": false,
+            "ordering": true,
+            "processing": true,
+            "serverSide": true,
+            "lengthMenu": [[20, 30, 50, 100,1000, -1], [20, 30, 50, 100,1000, "All"]],
+            "language": {"url": "/static/js/datatables.Chinese.json"},
+            "ajax": "/admin/table/api?tableId={{$table.Id}}",
+            "columns": [
+            {{ range $table.ColumnArray }}
+                { "data": "{{ . }}" },
+            {{ end }}
+            ]
+        });
+    })
+</script>
+{{end}}
 </html>

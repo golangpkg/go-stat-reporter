@@ -1,39 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-    <page id="userinfo" name="用户数据表">
-        <dataTable id="userinfo" name="用户数据表" table="user_info">
-            <column>id,name</column>
-            <label>id,姓名</label>
+    <page id="data-macroscopic" name="宏观经济数据-存款/贷款利率">
+        <dataTable id="ts_deposit_rate" name="存款利率" table="ts_deposit_rate">
+            <column>date,deposit_type,rate</column>
+            <label>日期,存款类型,存款利率</label>
         </dataTable>
-        <dataTable id="userinfo2" name="用户数据表">
-            <column>id,name</column>
-            <label>id,姓名</label>
+        <dataTable id="ts_loan_rate" name="贷款利率" table="ts_loan_rate">
+            <column>date,loan_type,rate</column>
+            <label>日期,贷款类型,贷款利率</label>
         </dataTable>
-        <dataChart id="userinfo1" name="用户数据表" type="line">
-            <column>id,name</column>
-        </dataChart>
-        <dataChart id="userinfo2" name="用户数据表" type="line">
-            <sql><![CDATA[
-                    select age from user_info
-                ]]></sql>
-        </dataChart>
-    </page>
-    <page id="userinfo1" name="每日股票数据">
-        <dataTable id="userinfo" name="用户数据表">
-            <sql><![CDATA[
-                    select id,`name` from user_info
-                ]]></sql>
-            <label>id,姓名</label>
+        <dataTable id="ts_rrr" name="存款准备金率" table="ts_rrr">
+            <column>date,before,now,changed</column>
+            <label>变动日期,调整前存款准备金率(%),调整后存款准备金率(%),调整幅度(%)</label>
         </dataTable>
     </page>
-    <page id="userinfo2" name="企业数据">
-        <dataTable id="userinfo" name="用户数据表">
-            <sql><![CDATA[
-                    select id,`name` from user_info
-                ]]></sql>
-            <label>id,姓名</label>
+    <page id="data-money-supply" name="宏观经济数据-货币供应量">
+        <dataTable id="ts_money_supply" name="存款准备金率" table="ts_money_supply">
+            <column>month,m2,m2_yoy,m1,m1_yoy,m0,m0_yoy,cd,cd_yoy,qm,qm_yoy,ftd,ftd_yoy,sd,sd_yoy,rests,rests_yoy</column>
+            <label>"统计时间,货币和准货币(广义货币M2)(亿元),货币和准货币(广义货币M2)同比增长(%)",
+                "货币(狭义货币M1)(亿元),货币(狭义货币M1)同比增长(%)",
+                "流通中现金(M0)(亿元),流通中现金(M0)同比增长(%)",
+                "活期存款(亿元),活期存款同比增长(%)",
+                "准货币(亿元),准货币同比增长(%)",
+                "定期存款(亿元),定期存款同比增长(%)",
+                "储蓄存款(亿元),储蓄存款同比增长(%)",
+                "其他存款(亿元),其他存款同比增长(%)"</label>
         </dataTable>
     </page>
-    <page id="userinfo4" name="用户数据"/>
-    <page id="userinfo5" name="股票增长数据"/>
 </pages>

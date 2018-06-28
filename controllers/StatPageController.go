@@ -70,6 +70,7 @@ func (c *StatPageController) TableApi() {
 	}
 	logs.Info("orderByColumn : ", orderByColumn)
 	logs.Info("orderByDir : ", orderByDir)
+	logs.Info("table : %v ", table)
 
 	//#######################组装order by sql。#######################
 	orderBySql := ""
@@ -80,7 +81,7 @@ func (c *StatPageController) TableApi() {
 			//找到排序字段和dir。
 			tmpIndex, _ := strconv.Atoi(val)
 			logs.Info("get val :", tmpIndex)
-			colTmp := "" //TODO table.ColumnArray[tmpIndex]
+			colTmp := table.ColumnArray[tmpIndex]
 			dirTmp := orderByDir[idx]
 
 			logs.Info("key:", tmpIndex, "colTmp :", colTmp, ", dirTmp :", dirTmp)

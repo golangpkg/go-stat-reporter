@@ -9,6 +9,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/context"
+	"html/template"
 )
 
 func initDb() {
@@ -55,18 +56,22 @@ func init() {
 	intiFilter()
 	//开启session。配置文件 配置下sessionon = true即可。
 	beego.BConfig.WebConfig.Session.SessionOn = true
-}
-
-func main() {
+	//初始化xml数据模板。
 	pwd, _ := os.Getwd()
 	println("get pwd:", pwd)
 	models.ReadXMLConfig(pwd + "/conf/pages.xml")
-	for _, page := range models.ConstantXmlPages.Pages {
-		println("page:", page.Name)
-		for _, table := range page.DataTables {
-			println("table:", table.Name)
-		}
-	}
+	println("######################")
+}
+
+//http://blog.xiayf.cn/2013/11/01/unescape-html-in-golang-html_template/
+// 定义函数unescaped
+func rawJs(x string) interface{}   { return template.JS(x) }
+func rawHtml(x string) interface{} { return template.HTML(x) }
+
+func main() {
+	//增加自定义函数。
+	beego.AddFuncMap("rawJs", rawJs)
+	beego.AddFuncMap("rawHtml", rawHtml)
 	//放到最后。
 	beego.Run()
 }
