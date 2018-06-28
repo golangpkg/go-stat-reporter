@@ -1,43 +1,36 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Material Design Lite</title>
+    <title>【数据统计系统】</title>
 {{template "meta.html" .}}
 </head>
 <body>
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-    <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">{{.Page.Name}}</span>
-            <div class="mdl-layout-spacer"></div>
-        </div>
-    </header>
-    {{template "left_menu.html" .}}
-    <main class="mdl-layout__content mdl-color--grey-100">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {{template "header.html" .}}
+    <main class="mdl-layout__content">
         {{range $key, $table := .Page.DataTables}}
-        <div class="mdl-grid demo-content">
-            <h5 class="mdl-cell">{{$table.Name}}</h5>
-            <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-                <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
-                    <thead>
-                    <tr>{{ range $table.LabelArray }}
-                        <th>{{.}}</th>
-                    {{ end }}
-                    </tr>
-                    </thead>
-                </table>
+            <div class="mdl-grid demo-content">
+                <h5 class="mdl-cell">{{$table.Name}}</h5>
+                <div class=" mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+                    <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
+                        <thead>
+                        <tr>{{ range $table.LabelArray }}
+                            <th>{{.}}</th>
+                        {{ end }}
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
-        </div>
         {{end}}
     </main>
 </div>
 </body>
-
 {{template "footer.html" .}}
-{{range $key, $table := .Page.DataTables}}
 <script type="application/javascript">
     jQuery(function($) {
-        var {{rawJs $table.Id}}
+        {{range $key, $table := .Page.DataTables}}
+        var {{rawJs $table.Id}};
         $('#dynamic-table-{{$table.Id}}').DataTable( {
             "bFilter": false,
             "ordering": true,
@@ -52,7 +45,8 @@
             {{ end }}
             ]
         });
+        {{end}}
     })
 </script>
-{{end}}
+
 </html>

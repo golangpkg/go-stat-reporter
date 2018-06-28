@@ -14,7 +14,7 @@ type XMLDataTable struct {
 	XMLName     xml.Name `xml:"dataTable"̀`
 	Id          string   `xml:"id,attr"̀`
 	Name        string   `xml:"name,attr"̀`
-	Table       string   `xml:"table,attr"̀`
+	Table       string   `xml:"table"̀`
 	Column      string   `xml:"column"̀`
 	Label       string   ` xml:"label"̀`
 	ColumnArray []string //字段项
@@ -26,8 +26,8 @@ type XMLDataChart struct {
 	XMLName xml.Name `xml:"dataChart"̀`
 	Id      string   `xml:"id,attr"̀`
 	Name    string   `xml:"name,attr"̀`
-	Table   string   `xml:"table,attr"̀`
 	Type    string   `xml:"type,attr"̀`
+	Table   string   `xml:"table"̀`
 	Column  string   `xml:"column"̀`
 	Label   string   ` xml:"label"̀`
 }
