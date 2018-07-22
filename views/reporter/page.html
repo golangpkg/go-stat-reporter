@@ -5,7 +5,7 @@
 {{template "meta.html" .}}
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
     {{template "header.html" .}}
     <main class="mdl-layout__content">
         {{range $key, $table := .Page.DataTables}}
