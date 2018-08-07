@@ -23,10 +23,11 @@ type StatTableApiJson struct {
 
 //html页面
 func (c *StatPageController) PageHtml() {
-	//获得id
-	tableId := c.GetString("pageId", "")
+	//获得pageId
+	tableId := c.Ctx.Input.Param(":pageId") //c.GetString("pageId", "")
+	tableId = strings.Replace(tableId, ".html", "", -1)
 	page, err := models.GetPage(tableId)
-	logs.Info("page: ", page)
+	logs.Info("page: ", tableId, page)
 	if err == nil {
 		c.Data["Page"] = page
 	} else {
