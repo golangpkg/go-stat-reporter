@@ -20,7 +20,7 @@
 
     <main class="mdl-layout__content">
         <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--8-col">
+            <div class="mdl-cell mdl-cell--10-col">
                 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                     <div class="mdl-card mdl-cell mdl-cell--12-col">
                         {{range $key, $table := .Page.DataTables}}
@@ -37,7 +37,7 @@
                     </div>
                 </section>
             </div>
-            <!--# include virtual="/widgets/coin_right.html" -->
+            {{template "right.html" .}}
         </div>
     </main>
 
@@ -65,6 +65,5 @@
     {{end}}
     })
 </script>
-<!--# include virtual="/widgets/analytics.html" -->
 </body>
 </html>

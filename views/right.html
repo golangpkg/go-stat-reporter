@@ -1,0 +1,16 @@
+{{define "right.html"}}
+<!-- ################## right widgets ################## -->
+<div class="mdl-cell  mdl-cell--2-col mdl-grid--no-spacing mdl-grid--no-spacing mdl-layout--large-screen-only" style="margin: 0;">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer has-drawer is-upgraded" data-upgraded=",MaterialLayout">
+        <div class="mdl-layout__drawer" aria-hidden="true">
+            <span class="mdl-layout-title mdl-color--primary mdl-color-text--white">Title</span>
+            <nav class="mdl-navigation">
+                {{range $key, $val := .XmlPageList}}
+                    <a class="mdl-navigation__link" href="/reporter/{{$val.Id}}.html">{{$val.Name}}</a>
+                {{end}}
+            </nav>
+        </div>
+    </div>
+</div>
+
+{{end}}
