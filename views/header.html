@@ -19,13 +19,5 @@
             <a href="#scroll-tab-6" class="mdl-layout__tab">Tab 6</a>
         </div>-->
     </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">数据菜单</span>
-        <nav class="mdl-navigation">
-        {{range $key, $val := .PageList}}
-            <a class="mdl-navigation__link" href="/admin/page?pageId={{$val.Id}}">{{$val.Name}}</a>
-        {{end}}
-        </nav>
-    </div>
 
 {{end}}

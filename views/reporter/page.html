@@ -2,51 +2,69 @@
 <html lang="en">
 <head>
     <title>【数据统计系统】</title>
-{{template "meta.html" .}}
+    {{template "meta.html" .}}
+    <style>
+        .tab5-is-active { color: #fff; }
+        .tab5-is-active::after {
+            height: 2px;width: 100%;display: block;
+            content: " ";bottom: 0;left: 0;position: absolute;background: #fff;
+            animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
+            transition: all 1s cubic-bezier(.4,0,1,1);
+        }
+    </style>
 </head>
-<body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
     {{template "header.html" .}}
+
     <main class="mdl-layout__content">
-        {{range $key, $table := .Page.DataTables}}
-            <div class="mdl-grid demo-content">
-                <h5 class="mdl-cell">{{$table.Name}}</h5>
-                <div class=" mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-                    <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
-                        <thead>
-                        <tr>{{ range $table.LabelArray }}
-                            <th>{{.}}</th>
-                        {{ end }}
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--8-col">
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                    <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        {{range $key, $table := .Page.DataTables}}
+                        <h5 class="mdl-cell">{{$table.Name}}</h5>
+                        <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
+                            <thead>
+                            <tr>{{ range $table.LabelArray }}
+                                <th>{{.}}</th>
+                            {{ end }}
+                            </tr>
+                            </thead>
+                        </table>
+                        {{end}}
+                    </div>
+                </section>
             </div>
-        {{end}}
+            <!--# include virtual="/widgets/coin_right.html" -->
+        </div>
     </main>
+
 </div>
-</body>
 {{template "footer.html" .}}
 <script type="application/javascript">
     jQuery(function($) {
-        {{range $key, $table := .Page.DataTables}}
+    {{range $key, $table := .Page.DataTables}}
         var {{rawJs $table.Id}};
         $('#dynamic-table-{{$table.Id}}').DataTable( {
+            "scrollX": true,
             "bFilter": false,
             "ordering": true,
             "processing": true,
             "serverSide": true,
-            "lengthMenu": [[20, 30, 50, 100,1000, -1], [20, 30, 50, 100,1000, "All"]],
+            "lengthMenu": [[15, 20, 30, 50, 100,1000, -1], [15, 20, 30, 50, 100,1000, "All"]],
             "language": {"url": "/static/js/datatables.Chinese.json"},
-            "ajax": "/admin/table/api?tableId={{$table.Id}}",
+            "ajax": "/reporter/api?tableId={{$table.Id}}",
             "columns": [
             {{ range $table.ColumnArray }}
                 { "data": "{{ . }}" },
             {{ end }}
             ]
         });
-        {{end}}
+    {{end}}
     })
 </script>
-
+<!--# include virtual="/widgets/analytics.html" -->
+</body>
 </html>
