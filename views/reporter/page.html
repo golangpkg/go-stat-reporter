@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>【数据统计系统】</title>
+    <title>【行情数据分析】</title>
     {{template "meta.html" .}}
     <style>
         .tab5-is-active { color: #fff; }
@@ -33,8 +33,7 @@
                         <table id="dynamic-table-{{$table.Id}}" class="mdl-data-table dataTable" style="width: 100%;" role="grid">
                             <thead>
                             <tr>{{ range $table.LabelArray }}
-                                <th>{{.}}</th>
-                            {{ end }}
+                                <th>{{.}}</th>{{ end }}
                             </tr>
                             </thead>
                         </table>
@@ -63,8 +62,7 @@
             "ajax": "/reporter/api?tableId={{$table.Id}}",
             "columns": [
             {{ range $table.ColumnArray }}
-                { "data": "{{ . }}" },
-            {{ end }}
+                { "data": "{{ . }}" },{{ end }}
             ]
         });
     {{end}}
