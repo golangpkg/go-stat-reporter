@@ -26,8 +26,10 @@ func (c *StatPageController) PageHtml() {
 	//获得pageId
 	tableId := c.Ctx.Input.Param(":pageId") //c.GetString("pageId", "")
 	tableId = strings.Replace(tableId, ".html", "", -1)
-	page, err := models.GetPage(tableId)
+	page, idx, err := models.GetPage(tableId)
 	logs.Info("page: ", tableId, page)
+	c.Data["XmlPageList"] = models.ConstantXmlPages.Pages
+	c.Data["RightNavIdx"] = idx //返回第几个菜单索引，用来高亮显示菜单。
 	if err == nil {
 		c.Data["Page"] = page
 	} else {

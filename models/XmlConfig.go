@@ -92,14 +92,14 @@ func ReadXMLConfig(file string) {
 	return
 }
 
-//循环pages的全部数据，找到id，返回page。
-func GetPage(id string) (page XMLPage, err error) {
-	for _, page := range ConstantXmlPages.Pages {
+//循环pages的全部数据，找到id，返回page，和当前index。
+func GetPage(id string) (page XMLPage, idx int, err error) {
+	for idx, page := range ConstantXmlPages.Pages {
 		if page.Id == id {
-			return page, nil
+			return page, idx, nil
 		}
 	}
-	return page, errors.New("no page .")
+	return page, 0, errors.New("no page .")
 }
 
 //循环Tables的全部数据，找到id，返回Table。

@@ -1,12 +1,13 @@
 {{define "right.html"}}
 <!-- ################## right widgets ################## -->
-<div class="mdl-cell  mdl-cell--2-col mdl-grid--no-spacing mdl-grid--no-spacing mdl-layout--large-screen-only" style="margin: 0;">
+<div class="mdl-cell  mdl-cell--2-col mdl-layout--large-screen-only">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer has-drawer is-upgraded" data-upgraded=",MaterialLayout">
         <div class="mdl-layout__drawer" aria-hidden="true">
-            <span class="mdl-layout-title mdl-color--primary mdl-color-text--white">Title</span>
+            <span class="mdl-layout-title mdl-color--primary mdl-color-text--white">数据统计分析</span>
             <nav class="mdl-navigation">
-                {{range $key, $val := .XmlPageList}}
-                    <a class="mdl-navigation__link" href="/reporter/{{$val.Id}}.html">{{$val.Name}}</a>
+                {{ $RightNavIdx := .RightNavIdx }}
+                {{range $idx, $val := .XmlPageList}}
+                    <a class="mdl- right_nav_link {{if eq $RightNavIdx $idx }} right_active {{end}}" href="/reporter/{{$val.Id}}.html">{{$val.Name}}</a>
                 {{end}}
             </nav>
         </div>
